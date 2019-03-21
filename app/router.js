@@ -6,9 +6,9 @@ import {
   NavigationActions
 } from "react-navigation";
 import {
-  reduxifyNavigator,
   createReactNavigationReduxMiddleware,
-  createNavigationReducer
+  createNavigationReducer,
+  createReduxContainer
 } from "react-navigation-redux-helpers";
 import { connect } from "react-redux";
 
@@ -25,9 +25,9 @@ const HomeNavigator = createBottomTabNavigator({
 
 HomeNavigator.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
-
   return {
-    headerTitle: routeName
+    headerTitle: routeName,
+    header: null
   };
 };
 
@@ -37,7 +37,10 @@ const MainNavigator = createStackNavigator(
     Detail: { screen: Detail }
   },
   {
-    headerMode: "float"
+    headerMode: "float",
+    defaultNavigationOptions: {
+      gesturesEnabled: false
+    }
   }
 );
 
@@ -48,8 +51,8 @@ const AppNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    mode: "modal",
-    navigationOptions: {
+    mode: "card",
+    defaultNavigationOptions: {
       gesturesEnabled: false
     },
     transitionConfig: () => ({
@@ -82,11 +85,11 @@ const AppNavigator = createStackNavigator(
 export const routerReducer = createNavigationReducer(AppNavigator);
 
 export const routerMiddleware = createReactNavigationReduxMiddleware(
-  "root",
-  state => state.router
+  state => state.router,
+  "root"
 );
 
-const App = reduxifyNavigator(AppNavigator, "root");
+const App = createReduxContainer(AppNavigator, "root");
 
 function getActiveRouteName(navigationState) {
   if (!navigationState) {

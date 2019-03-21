@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import { connect } from "react-redux";
 
 import { Button } from "../components";
@@ -8,14 +8,18 @@ import { NavigationActions } from "../utils";
 
 @connect()
 class Home extends Component {
-  static navigationOptions = {
-    tabBarLabel: "Home",
-    tabBarIcon: ({ focused, tintColor }) => (
-      <Image
-        style={[styles.icon, { tintColor: focused ? tintColor : "gray" }]}
-        source={require("../images/house.png")}
-      />
-    )
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+    return {
+      header: () => <Text>123</Text>,
+      tabBarLabel: "Home",
+      tabBarIcon: ({ focused, tintColor }) => (
+        <Image
+          style={[styles.icon, { tintColor: focused ? tintColor : "gray" }]}
+          source={require("../images/house.png")}
+        />
+      )
+    };
   };
 
   gotoDetail = () => {
