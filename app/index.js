@@ -3,7 +3,7 @@ import { AppRegistry } from "react-native";
 
 import dva from "./utils/dva";
 import Router, { routerMiddleware, routerReducer } from "./router";
-import app Model from "./models/app";
+import appModel from "./models/app";
 
 const app = dva({
   initialState: {},
