@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, StatusBar } from "react-native";
+import { StyleSheet, View, Image, StatusBar, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 
 import { Button } from "../components";
@@ -21,12 +21,16 @@ class Home extends Component {
     };
   };
   componentDidMount() {
-    this._navListener = this.props.navigation.addListener("didFocus", () => {
-      StatusBar.setHidden(true);
+    this._focusListener = this.props.navigation.addListener("willFocus", () => {
+      StatusBar.setHidden(true, "fade");
+    });
+    this._blurListener = this.props.navigation.addListener("willBlur", () => {
+      StatusBar.setHidden(false, "fade");
     });
   }
   componentWillUnmount() {
-    this._navListener.remove();
+    this._focusListener.remove();
+    this._blurListener.remove();
   }
   gotoDetail = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: "Detail" }));
@@ -34,9 +38,9 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Button text="Goto Detail" onPress={this.gotoDetail} />
-      </View>
+      <SafeAreaView style={styles.container}>
+        <Button text="Goto Detail11" onPress={this.gotoDetail} />
+      </SafeAreaView>
     );
   }
 }

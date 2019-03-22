@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, StatusBar } from "react-native";
+import { StyleSheet, View, Image, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 
 import { Button } from "../components";
@@ -18,16 +18,8 @@ class Account extends Component {
       />
     )
   };
-  componentDidMount() {
-    this._navListener = this.props.navigation.addListener("didFocus", () => {
-      StatusBar.setHidden(false);
-      StatusBar.setBarStyle("dark-content");
-      StatusBar.setBackgroundColor("#ffffff");
-    });
-  }
-  componentWillUnmount() {
-    this._navListener.remove();
-  }
+  componentDidMount() {}
+  componentWillUnmount() {}
   gotoLogin = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: "Login" }));
   };
@@ -39,13 +31,13 @@ class Account extends Component {
   render() {
     const { login } = this.props;
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         {login ? (
           <Button text="Logout" onPress={this.logout} />
         ) : (
           <Button text="Goto Login" onPress={this.gotoLogin} />
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 }
