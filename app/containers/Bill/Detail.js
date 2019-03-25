@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 
-import { Button } from "../components";
+import { Button } from "@/components";
 
-import { NavigationActions } from "../utils";
+import { NavigationActions } from "@/utils";
 
 @connect()
 class Detail extends Component {

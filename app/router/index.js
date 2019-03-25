@@ -1,52 +1,19 @@
 import React, { PureComponent } from "react";
 import { BackHandler, Animated, Easing } from "react-native";
-import {
-  createStackNavigator,
-  createBottomTabNavigator,
-  NavigationActions
-} from "react-navigation";
+import { createStackNavigator, NavigationActions } from "react-navigation";
 import {
   createReactNavigationReduxMiddleware,
   createNavigationReducer,
   createReduxContainer
 } from "react-navigation-redux-helpers";
 import { connect } from "react-redux";
-
+import mainRoute from "./mainRoute";
 import Loading from "@/containers/Loading";
 import Login from "@/containers/Login";
-import Home from "@/containers/Home";
-import Account from "@/containers/Account";
-import Detail from "@/containers/Detail";
-
-const HomeNavigator = createBottomTabNavigator({
-  Home: { screen: Home },
-  Account: { screen: Account }
-});
-
-HomeNavigator.navigationOptions = ({ navigation }) => {
-  const { routeName } = navigation.state.routes[navigation.state.index];
-  return {
-    headerTitle: routeName,
-    header: null
-  };
-};
-
-const MainNavigator = createStackNavigator(
-  {
-    HomeNavigator: { screen: HomeNavigator },
-    Detail: { screen: Detail }
-  },
-  {
-    headerMode: "float",
-    defaultNavigationOptions: {
-      gesturesEnabled: false
-    }
-  }
-);
 
 const AppNavigator = createStackNavigator(
   {
-    Main: { screen: MainNavigator },
+    Main: { screen: mainRoute },
     Login: { screen: Login }
   },
   {

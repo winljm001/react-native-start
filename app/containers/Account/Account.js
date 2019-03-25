@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { StyleSheet, View, Image, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 
-import { Button } from "../components";
+import { Button } from "@/components";
 
-import { createAction, NavigationActions } from "../utils";
+import { createAction, NavigationActions } from "@/utils";
 
 @connect(({ app }) => ({ ...app }))
 class Account extends Component {
@@ -14,7 +14,7 @@ class Account extends Component {
     tabBarIcon: ({ focused, tintColor }) => (
       <Image
         style={[styles.icon, { tintColor: focused ? tintColor : "gray" }]}
-        source={require("../images/person.png")}
+        source={require("@/images/person.png")}
       />
     )
   };

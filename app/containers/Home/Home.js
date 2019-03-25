@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { StyleSheet, View, Image, StatusBar, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 
-import { Button } from "../components";
+import { Button } from "@/components";
 
-import { NavigationActions } from "../utils";
+import { NavigationActions } from "@/utils";
 
 @connect()
 class Home extends Component {
@@ -15,7 +15,7 @@ class Home extends Component {
       tabBarIcon: ({ focused, tintColor }) => (
         <Image
           style={[styles.icon, { tintColor: focused ? tintColor : "gray" }]}
-          source={require("../images/house.png")}
+          source={require("@/images/house.png")}
         />
       )
     };
@@ -33,7 +33,9 @@ class Home extends Component {
     this._blurListener.remove();
   }
   gotoDetail = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: "Detail" }));
+    this.props.dispatch(
+      NavigationActions.navigate({ routeName: "BillDetail" })
+    );
   };
 
   render() {
