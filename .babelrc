@@ -6,6 +6,13 @@
     }
   },
   "plugins": [
+    ["module-resolver", {
+      "root": ["./app"],
+      "extensions": [".ios.js", ".android.js", ".js", ".json"],
+      "alias": {
+        "@": "./app"
+      }
+    }],
     ["@babel/plugin-proposal-decorators", { "legacy": true }]
   ]
 }
