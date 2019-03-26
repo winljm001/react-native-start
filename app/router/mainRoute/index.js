@@ -4,12 +4,13 @@ import {
 } from "react-navigation";
 import Home from "@/containers/Home/Home";
 import Account from "@/containers/Account/Account";
+import Bill from "@/containers/Bill/Add";
 import BillRoute from "./Bill";
 
 const TabNavigator = createBottomTabNavigator(
   {
     Home: { screen: Home },
-    Account: { screen: Account }
+    Bill: { screen: Bill }
   },
   {
     tabBarOptions: {
