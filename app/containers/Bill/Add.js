@@ -35,6 +35,7 @@ class Add extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <Text>add</Text>
+        <Button text="logout" onPress={this.logout} />
       </SafeAreaView>
     );
   }

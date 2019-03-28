@@ -7,6 +7,9 @@ import {
   createReduxContainer
 } from "react-navigation-redux-helpers";
 import { connect } from "react-redux";
+import systemConfig from "@/config/systemConfig";
+const { authKey } = systemConfig;
+import { Storage } from "@/utils";
 import mainRoute from "./mainRoute";
 import Loading from "@/containers/Loading";
 import Login from "@/containers/Login";
@@ -73,8 +76,11 @@ function getActiveRouteName(navigationState) {
 
 @connect(({ app, router }) => ({ app, router }))
 class Router extends PureComponent {
-  componentWillMount() {
-    this.props.dispatch(NavigationActions.navigate({ routeName: "Login" }));
+  async componentWillMount() {
+    const token = await Storage.get(authKey);
+    if (token === "") {
+      this.props.dispatch(NavigationActions.navigate({ routeName: "Login" }));
+    }
     BackHandler.addEventListener("hardwareBackPress", this.backHandle);
   }
 
