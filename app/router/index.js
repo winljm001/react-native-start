@@ -10,11 +10,13 @@ import { connect } from "react-redux";
 import mainRoute from "./mainRoute";
 import Loading from "@/containers/Loading";
 import Login from "@/containers/Login";
+import Register from "@/containers/Register";
 
 const AppNavigator = createStackNavigator(
   {
     Main: { screen: mainRoute },
-    Login: { screen: Login }
+    Login: { screen: Login },
+    Register: { screen: Register }
   },
   {
     headerMode: "none",
@@ -72,6 +74,7 @@ function getActiveRouteName(navigationState) {
 @connect(({ app, router }) => ({ app, router }))
 class Router extends PureComponent {
   componentWillMount() {
+    this.props.dispatch(NavigationActions.navigate({ routeName: "Login" }));
     BackHandler.addEventListener("hardwareBackPress", this.backHandle);
   }
 

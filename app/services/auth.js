@@ -1,6 +1,15 @@
-import { delay } from "../utils";
+import request from "@/utils/request";
+import { stringify } from "qs";
 
-export const login = async () => {
-  await delay(2000);
-  return true;
-};
+export function login(params) {
+  return request(`/admin/Login/index`, {
+    method: "post",
+    body: params
+  });
+}
+export function register(params) {
+  return request(`/admin/User/register`, {
+    method: "post",
+    body: params
+  });
+}

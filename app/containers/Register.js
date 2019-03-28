@@ -5,38 +5,45 @@ import { Button, InputItem, List } from "@ant-design/react-native";
 import { NavigationActions, createAction } from "../utils";
 import { Toast } from "@ant-design/react-native";
 @connect(({ app }) => ({ ...app }))
-class Login extends Component {
+class Register extends Component {
   static navigationOptions = {
-    title: "Login"
+    title: "注册"
   };
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      password1: ""
     };
   }
-  loginAction = () => {
-    const { username, password } = this.state;
+  registerAction = () => {
+    const { username, password, password1 } = this.state;
     if (username === "" || password === "") {
       Toast.fail("请输入账号或密码");
       return false;
     }
+    if (password1 === "") {
+      Toast.fail("请再次确认密码");
+      return false;
+    }
+    if (password1 !== password) {
+      Toast.fail("两次密码不一致");
+      return false;
+    }
     this.props.dispatch(
-      createAction("app/login")({
+      createAction("app/register")({
         username,
         password
       })
     );
   };
-  goRegister = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: "Register" }));
-  };
+
   render() {
     const { fetching } = this.props;
     return (
       <View style={styles.container}>
-        <List renderHeader={"登录"}>
+        <List renderHeader={"注册"}>
           <InputItem
             clear
             value={this.state.username}
@@ -62,23 +69,26 @@ class Login extends Component {
           >
             密码：
           </InputItem>
+          <InputItem
+            clear
+            value={this.state.password1}
+            type="password"
+            onChange={password1 => {
+              this.setState({
+                password1
+              });
+            }}
+            placeholder="请输入密码确认一瞎"
+          >
+            再次：
+          </InputItem>
           <List.Item>
             <Button
               loading={fetching}
-              onPress={() => {
-                // 登录
-                this.loginAction();
-              }}
               type="primary"
-            >
-              登录
-            </Button>
-          </List.Item>
-          <List.Item>
-            <Button
               onPress={() => {
                 // 注册
-                this.goRegister();
+                this.registerAction();
               }}
             >
               注册
@@ -96,4 +106,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default Register;
