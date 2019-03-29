@@ -1,22 +1,24 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, SafeAreaView } from "react-native";
+import { StyleSheet, View, Text, Image, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 
 import { Button } from "@/components";
-
+import { tabBarOptions } from "@/config/bottomTab";
 import { createAction, NavigationActions } from "@/utils";
 
 @connect(({ app }) => ({ ...app }))
 class Account extends Component {
   static navigationOptions = {
-    tabBarLabel: "Account",
-
-    tabBarIcon: ({ focused, tintColor }) => (
-      <Image
-        style={[styles.icon, { tintColor: focused ? tintColor : "gray" }]}
-        source={require("@/images/person.png")}
-      />
-    )
+    tabBarLabel: "me",
+    tabBarOptions,
+    tabBarIcon: ({ focused }) =>
+      focused ? (
+        <Image
+          resizeMode="stretch"
+          style={[styles.icon]}
+          source={require("@/images/icon_bg.png")}
+        />
+      ) : null
   };
   componentDidMount() {}
   componentWillUnmount() {}
@@ -32,11 +34,8 @@ class Account extends Component {
     const { login } = this.props;
     return (
       <SafeAreaView style={styles.container}>
-        {login ? (
-          <Button text="Logout" onPress={this.logout} />
-        ) : (
-          <Button text="Goto Login" onPress={this.gotoLogin} />
-        )}
+        <Text>add</Text>
+        <Button text="logout" onPress={this.logout} />
       </SafeAreaView>
     );
   }
@@ -49,8 +48,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   icon: {
-    width: 32,
-    height: 32
+    width: 85,
+    height: 50
   }
 });
 

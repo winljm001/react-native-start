@@ -10,7 +10,8 @@ import BillRoute from "./Bill";
 const TabNavigator = createBottomTabNavigator(
   {
     Home: { screen: Home },
-    Bill: { screen: Bill }
+    Bill: { screen: Bill },
+    Account: { screen: Account }
   },
   {
     tabBarOptions: {

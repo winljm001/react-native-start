@@ -3,11 +3,11 @@ import { AppRegistry, Dimensions } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import dva from "./utils/dva";
 import Router, { routerMiddleware, routerReducer } from "./router";
-import appModel from "./models/app";
+import appModel from "./models";
 import { Provider } from "@ant-design/react-native";
 const app = dva({
   initialState: {},
-  models: [appModel],
+  models: [...appModel],
   extraReducers: { router: routerReducer },
   onAction: [routerMiddleware],
   onError(e) {
