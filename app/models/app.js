@@ -27,29 +27,33 @@ export default {
     // 登录
     *login({ payload }, { call, put }) {
       yield put(createAction("updateState")({ fetching: true }));
-      const { code, data, msg } = yield call(authService.login, payload);
-      if (code === 1) {
-        yield Toast.info("登录成功");
-        const token = data.apiAuth;
-        yield put(createAction("updateState")({ userInfo: data, token }));
-        yield Storage.set("userInfo", data);
-        yield Storage.set(authKey, token);
-        yield put(NavigationActions.back());
-      } else {
-        yield Toast.fail(msg);
-      }
+      try {
+        const { code, data, msg } = yield call(authService.login, payload);
+        if (code === 1) {
+          yield Toast.info("登录成功");
+          const token = data.apiAuth;
+          yield put(createAction("updateState")({ userInfo: data, token }));
+          yield Storage.set("userInfo", data);
+          yield Storage.set(authKey, token);
+          yield put(NavigationActions.back());
+        } else {
+          yield Toast.fail(msg);
+        }
+      } catch (error) {}
       yield put(createAction("updateState")({ fetching: false }));
     },
     // 注册
     *register({ payload }, { call, put }) {
       yield put(createAction("updateState")({ fetching: true }));
-      const { code, data, msg } = yield call(authService.register, payload);
-      if (code === 1) {
-        yield Toast.info("注册成功");
-        yield put(NavigationActions.back());
-      } else {
-        yield Toast.fail(msg);
-      }
+      try {
+        const { code, data, msg } = yield call(authService.register, payload);
+        if (code === 1) {
+          yield Toast.info("注册成功");
+          yield put(NavigationActions.back());
+        } else {
+          yield Toast.fail(msg);
+        }
+      } catch (error) {}
       yield put(createAction("updateState")({ fetching: false }));
     },
     // 退出登录
