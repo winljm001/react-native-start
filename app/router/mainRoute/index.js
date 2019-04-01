@@ -4,7 +4,7 @@ import {
 } from "react-navigation";
 import Home from "@/containers/Home/Home";
 import Account from "@/containers/Account/Account";
-import Bill from "@/containers/Bill/Add";
+import Bill from "@/containers/Bill/Index";
 import BillRoute from "./Bill";
 
 const TabNavigator = createBottomTabNavigator(
