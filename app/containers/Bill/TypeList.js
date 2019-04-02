@@ -21,7 +21,7 @@ class BillTypeList extends Component {
     title: "账单分类列表"
   };
   componentDidMount() {
-    this.props.dispatch(createAction("BillTypeList/queryTypeList")());
+    this.props.dispatch(createAction("BillTypeList/queryTypeList")({ uid: 1 }));
   }
   componentWillUnmount() {}
 

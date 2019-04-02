@@ -13,3 +13,8 @@ export function register(params) {
     body: params
   });
 }
+export function queryTypeList(params) {
+  return request(`/admin/BillType/index?${stringify(params)}`, {
+    method: "get"
+  });
+}
